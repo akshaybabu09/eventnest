@@ -1,4 +1,6 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from django.shortcuts import get_object_or_404
+from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.generics import ListCreateAPIView, CreateAPIView, ListAPIView
 
 from .models import Event, Attendee
@@ -9,6 +11,9 @@ from .serializers import EventSerializer, AttendeeSerializer
 class ListCreateEvents(ListCreateAPIView):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
+    filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
+    search_fields = ["name"]
+    ordering = ["start_time"]
 
 
 class RegisterAttendee(CreateAPIView):
@@ -27,6 +32,9 @@ class RegisterAttendee(CreateAPIView):
 class ListAttendees(ListAPIView):
     queryset = Attendee.objects.all()
     serializer_class = AttendeeSerializer
+    filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
+    search_fields = ["name", "email"]
+    ordering = ["name"]
     
     def get_queryset(self):
         return super().get_queryset().filter(event_id=self.kwargs.get("event_id"))

@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'rest_framework_gis',
     # other libraries
     'rest_framework',
+    'drf_spectacular',
     # django apps
     'events',
 ]
@@ -146,15 +147,23 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # REST Framework related settings
 REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     "DEFAULT_VERSIONING_CLASS": "rest_framework.versioning.URLPathVersioning",
     "ALLOWED_VERSIONS": ["v1"],
     "DEFAULT_VERSION": "v1",
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 10,
-    "DEFAULT_SCHEMA_CLASS": "rest_framework_gis.schema.GeoFeatureAutoSchema",
     'DEFAULT_FILTER_BACKENDS': (
         'django_filters.rest_framework.DjangoFilterBackend',
         'rest_framework.filters.SearchFilter',
         'rest_framework.filters.OrderingFilter',
     )
+}
+
+
+# DRF Spectacular related settings
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Eventnest',
+    'DESCRIPTION': 'API documentation',
+    'VERSION': '1.0.0',
 }
