@@ -148,9 +148,12 @@ Go to http://127.0.0.1:8000/api/docs/redoc/ or http://localhost:8000/api/docs/
 
 ### 8. Database Schema
 
-```
-Have included the migration files for reference
-```
+The migration files are part of the events app for reference. It contains step by step execution of how the database schema eveolved to the final design.
+
+
+### 9. Postman Schema
+
+The postman collection is exported and attached in the codebase as a JSON file for reference, it consists of the APIs in a structured manner helping in getting context.
 
 
 
