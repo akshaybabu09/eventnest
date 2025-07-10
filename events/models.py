@@ -19,6 +19,7 @@ class Event(TimeStampedModel):
     objects = EventManager()
 
     class Meta:
+        ordering = ["start_time"]
         constraints = [
                 models.UniqueConstraint(
                     fields=["name", "location", "start_time", "end_time"],
@@ -51,6 +52,7 @@ class Attendee(TimeStampedModel):
         return f"{self.name} - {self.email}"
     
     class Meta:
+        ordering = ["name"]
         constraints = [
                 models.UniqueConstraint(
                     fields=["event", "email"],

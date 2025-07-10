@@ -11,9 +11,8 @@ from .serializers import EventSerializer, AttendeeSerializer
 class ListCreateEvents(ListCreateAPIView):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
-    filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
+    filter_backends = [DjangoFilterBackend, SearchFilter]
     search_fields = ["name"]
-    ordering = ["start_time"]
 
 
 class RegisterAttendee(CreateAPIView):
@@ -32,9 +31,8 @@ class RegisterAttendee(CreateAPIView):
 class ListAttendees(ListAPIView):
     queryset = Attendee.objects.all()
     serializer_class = AttendeeSerializer
-    filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
+    filter_backends = [DjangoFilterBackend, SearchFilter]
     search_fields = ["name", "email"]
-    ordering = ["name"]
     
     def get_queryset(self):
         return super().get_queryset().filter(event_id=self.kwargs.get("event_id"))
